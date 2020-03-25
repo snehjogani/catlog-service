@@ -4,7 +4,7 @@ import BooksModel from '../models/books'
 const filePath = './public/catlog.json'
 
 module.exports = (app) => {
-  app.get('/catlog', async (req, res) => {
+  app.get('/catlog', (req, res) => {
     const { query: { keyword } } = req
     const query = {
       $or: [
@@ -12,7 +12,7 @@ module.exports = (app) => {
         { title: { $regex: keyword, $options: 'i' } },
       ],
     }
-    await BooksModel.find(query, null, {}, (err, docs) => {
+    BooksModel.find(query, null, {}, (err, docs) => {
       fs.readFile(filePath, 'utf8', (e, data) => {
         if (e) {
           console.log('fs error', e)
