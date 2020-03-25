@@ -15,7 +15,7 @@ module.exports = (app) => {
     await BooksModel.find(query, null, {}, (err, docs) => {
       fs.readFile(filePath, 'utf8', (e, data) => {
         if (e) {
-          console.log(e)
+          console.log('fs error', e)
           return
         }
         const catlogData = data ? JSON.parse(data) : []
